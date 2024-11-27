@@ -22,6 +22,8 @@ Route::get('home', [HomeController::class, 'index'])->name('user.home')->middlew
 
 Route::get('products', [ProductController::class, 'index'])->name('user.product')->middleware('auth');
 Route::get('products/search', [ProductController::class, 'search'])->name('user.product.search')->middleware('auth');
+Route::get('products/{id}', [ProductController::class, 'detail'])->name('user.product.detail')->middleware('auth');
 
 Route::get('services', [ServiceController::class, 'index'])->name('user.service')->middleware('auth');
 Route::get('services/search', [ServiceController::class, 'search'])->name('user.service.search')->middleware('auth');
+Route::get('services/{id}', [ServiceController::class, 'detail'])->name('user.service.detail')->middleware('auth');

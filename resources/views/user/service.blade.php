@@ -27,31 +27,10 @@
         </div>
     </div>
 
-    <!-- Products Grid -->
+    <!-- Service Grid -->
     <div class="row g-4">
         @foreach($services as $service)
-        <div class="col-md-4">
-            <div class="card border-0 h-100"
-                style="border-radius: 15px; overflow: hidden; background-color: #D1F2D9;">
-                <div style="background-color: #fce5cd; height: 250px;">
-                    <img src="{{ asset('storage/' . $service->image) }}"
-                        class="img-fluid"
-                        alt="{{ $service->name }}"
-                        style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" style="color: #214F3E; font-weight: 600;">
-                        {{ $service->name }}
-                    </h5>
-                    <p class="card-text mb-1" style="color: #666;">
-                        {{ $service->shop->name }}
-                    </p>
-                    <p class="card-text" style="color: #214F3E; font-weight: 600;">
-                        Rp {{ number_format($service->price_per_hour, 0, ',', '.') }} / Hour
-                    </p>
-                </div>
-            </div>
-        </div>
+            @include('components.serviceCard')
         @endforeach
     </div>
 
@@ -60,20 +39,20 @@
         <nav>
             <ul class="pagination">
                 {{-- Previous Page Link --}}
-                @if ($products->onFirstPage())
+                @if ($services->onFirstPage())
                 <li class="page-item disabled">
                     <span class="page-link">&laquo;</span>
                 </li>
                 @else
                 <li class="page-item">
-                    <a class="page-link" href="{{ $products->previousPageUrl() }}">&laquo;</a>
+                    <a class="page-link" href="{{ $services->previousPageUrl() }}">&laquo;</a>
                 </li>
                 @endif
 
                 {{-- Pagination Elements --}}
                 @php
-                $start = max(1, $products->currentPage() - 2);
-                $end = min($start + 4, $products->lastPage());
+                $start = max(1, $services->currentPage() - 2);
+                $end = min($start + 4, $services->lastPage());
                 if ($end - $start < 4) {
                     $start=max(1, $end - 4);
                     }
@@ -82,7 +61,7 @@
                     {{-- First Page + Dots --}}
                     @if($start> 1)
                     <li class="page-item">
-                        <a class="page-link" href="{{ $products->url(1) }}">1</a>
+                        <a class="page-link" href="{{ $services->url(1) }}">1</a>
                     </li>
                     @if($start > 2)
                     <li class="page-item disabled">
@@ -93,27 +72,27 @@
 
                     {{-- Page Links --}}
                     @for ($i = $start; $i <= $end; $i++)
-                        <li class="page-item {{ $products->currentPage() == $i ? 'active' : '' }}">
-                        <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                        <li class="page-item {{ $services->currentPage() == $i ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $services->url($i) }}">{{ $i }}</a>
                         </li>
                         @endfor
 
                         {{-- Last Page + Dots --}}
-                        @if($end < $products->lastPage())
-                            @if($end < $products->lastPage() - 1)
+                        @if($end < $services->lastPage())
+                            @if($end < $services->lastPage() - 1)
                                 <li class="page-item disabled">
                                     <span class="page-link">...</span>
                                 </li>
                                 @endif
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $products->url($products->lastPage()) }}">{{ $products->lastPage() }}</a>
+                                    <a class="page-link" href="{{ $services->url($services->lastPage()) }}">{{ $services->lastPage() }}</a>
                                 </li>
                                 @endif
 
                                 {{-- Next Page Link --}}
-                                @if ($products->hasMorePages())
+                                @if ($services->hasMorePages())
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $products->nextPageUrl() }}">&raquo;</a>
+                                    <a class="page-link" href="{{ $services->nextPageUrl() }}">&raquo;</a>
                                 </li>
                                 @else
                                 <li class="page-item disabled">

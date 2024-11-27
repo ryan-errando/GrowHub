@@ -23,4 +23,10 @@ class ServiceController
         
         return view('user.service', compact('services', 'search'));
     }
+
+    public function detail($id)
+    {
+        $service = Service::with('shop')->findOrFail($id);
+        return view('user.serviceDetail', compact('service'));
+    }
 }

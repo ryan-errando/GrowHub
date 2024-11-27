@@ -48,23 +48,7 @@
     <h2 class="mb-4" style="color: #214F3E;">Featured Plants</h2>
     <div class="row">
         @foreach($featuredProducts as $product)
-        <div class="col-md-4 mb-4">
-            <div class="card border-0 h-100" style="border-radius: 15px; overflow: hidden;">
-                <div style="background-color: #fce5cd; height: 200px; display: flex; align-items: center; justify-content: center;">
-                    <img src="{{ asset('storage/' . $product->image) }}" 
-                         class="img-fluid" 
-                         alt="{{ $product->name }}"
-                         style="object-fit: cover; height: 100%; width: 100%;">
-                </div>
-                <div class="card-body" style="background-color: #D1F2D9;">
-                    <h5 class="card-title" style="color: #214F3E; font-weight: 600;">{{ $product->name }}</h5>
-                    <p class="card-text mb-1" style="color: #666;">{{ $product->shop->name }}</p>
-                    <p class="card-text" style="color: #214F3E; font-weight: 600;">
-                        Rp {{ number_format($product->price, 0, ',', '.') }}
-                    </p>
-                </div>
-            </div>
-        </div>
+            @include('components.productCard')
         @endforeach
     </div>
 </div>
