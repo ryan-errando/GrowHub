@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
                 'description' => 'High-performance gaming laptop with RTX 3080',
                 'price' => 199999, // $1,999.99
                 'stock' => 10,
-                'images' => json_encode(['products/tech/laptop-1.jpg', 'products/tech/laptop-2.jpg'])
+                'image' => ''
             ],
             [
                 'shop_id' => 1,
@@ -29,7 +29,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Premium wireless earbuds with noise cancellation',
                 'price' => 19999, // $199.99
                 'stock' => 50,
-                'images' => json_encode(['products/tech/earbuds-1.jpg', 'products/tech/earbuds-2.jpg'])
+                'image' => ''
             ],
             [
                 'shop_id' => 1,
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
                 'description' => '32-inch 4K gaming monitor with 144Hz',
                 'price' => 59999, // $599.99
                 'stock' => 15,
-                'images' => json_encode(['products/tech/monitor-1.jpg', 'products/tech/monitor-2.jpg'])
+                'image' => ''
             ]
         ];
 
@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Luxury leather handbag',
                 'price' => 29999, // $299.99
                 'stock' => 20,
-                'images' => json_encode(['products/fashion/bag-1.jpg', 'products/fashion/bag-2.jpg'])
+                'image' => ''
             ],
             [
                 'shop_id' => 2,
@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Floral print summer dress',
                 'price' => 7999, // $79.99
                 'stock' => 30,
-                'images' => json_encode(['products/fashion/dress-1.jpg', 'products/fashion/dress-2.jpg'])
+                'image' => ''
             ],
             [
                 'shop_id' => 2,
@@ -65,7 +65,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Premium UV protection sunglasses',
                 'price' => 14999, // $149.99
                 'stock' => 25,
-                'images' => json_encode(['products/fashion/sunglasses-1.jpg', 'products/fashion/sunglasses-2.jpg'])
+                'image' => ''
             ]
         ];
 
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
                 'description' => 'WiFi-enabled programmable coffee maker',
                 'price' => 12999, // $129.99
                 'stock' => 40,
-                'images' => json_encode(['products/home/coffee-1.jpg', 'products/home/coffee-2.jpg'])
+                'image' => ''
             ],
             [
                 'shop_id' => 3,
@@ -85,7 +85,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Smart robot vacuum with mapping',
                 'price' => 39999, // $399.99
                 'stock' => 25,
-                'images' => json_encode(['products/home/vacuum-1.jpg', 'products/home/vacuum-2.jpg'])
+                'image' => ''
             ],
             [
                 'shop_id' => 3,
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
                 'description' => 'HEPA air purifier for large rooms',
                 'price' => 24999, // $249.99
                 'stock' => 30,
-                'images' => json_encode(['products/home/purifier-1.jpg', 'products/home/purifier-2.jpg'])
+                'image' => ''
             ]
         ];
 

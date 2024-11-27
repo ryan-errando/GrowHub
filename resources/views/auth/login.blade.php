@@ -1,67 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+@extends('layout.auth')
+@section('title', 'Login')
 
-            @if(session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                    {{ session('error') }}
-                </div>
-            @endif
+@section('content')
 
-            @if($errors->any())
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                    <ul class="list-disc list-inside">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+@if(session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert"> 
+    {{ session('success') }} 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+@endif
 
-            <form action="{{ route('login.submit') }}" method="POST">
+@if(session()->has('loginError'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert"> 
+    {{ session('loginError') }} 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+@endif
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm" style="width: 100%; max-width: 400px; background-color: #f5f5f5; border-radius: 20px; border: none;">
+        <div class="card-body p-3 p-md-4">
+            <h1 class="mb-4" style="font-weight: bold;">Login</h1>
+            
+            <form action="/login" method="post">
                 @csrf
-                
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Login as</label>
-                    <select name="role" 
-                            class="w-full p-2 border rounded @error('role') border-red-500 @enderror">
-                        <option value="user">User</option>
-                        <option value="seller">Seller</option>
-                    </select>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input type="email" 
-                           name="email" 
+                <div class="mb-3">
+                    <label for="email" class="form-label" style="font-weight: 600;">Email</label>
+                    <input name="email" 
+                           type="email" 
+                           class="form-control @error('email') is-invalid @enderror" 
+                           id="email" 
+                           placeholder="name@example.com" 
+                           required 
                            value="{{ old('email') }}"
-                           class="w-full p-2 border rounded @error('email') border-red-500 @enderror" 
-                           required>
+                           style="background-color: #D3D3D3; border: none; border-radius: 10px; padding: 10px;">
+                    @error('email')
+                    <div class="text-danger mt-1">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input type="password" 
-                           name="password" 
-                           class="w-full p-2 border rounded @error('password') border-red-500 @enderror" 
-                           required>
+                <div class="mb-4">
+                    <label for="password" class="form-label" style="font-weight: 600;">Password</label>
+                    <input name="password" 
+                           type="password" 
+                           class="form-control" 
+                           id="password" 
+                           required
+                           style="background-color: #D3D3D3; border: none; border-radius: 10px; padding: 10px;">
                 </div>
 
                 <button type="submit" 
-                        class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                    Login
-                </button>
+                        class="btn btn-success w-100 mb-3 py-2" 
+                        style="background-color: #6BAE75; border: none; border-radius: 10px; font-weight: 600;">Login</button>
+                
+                <div class="text-center">
+                    <a href="{{ route('register') }}" 
+                       class="text-decoration-underline" 
+                       style="color: #000; font-weight: 500;">Register</a>
+                </div>
             </form>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<style>
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #75B798;
+    background-color: #D3D3D3;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+}
+</style>
+
+@endsection

@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\Product;
-use App\Models\Service;
-use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController
 {
     public function index()
     {
-        $products = Product::with('shop')
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
-
-        $services = Service::with('shop')
-            ->where('is_available', true)
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
-
-        return view('user.home', compact('products', 'services'));
+        $featuredProducts = Product::with('shop')->inRandomOrder()->take(3)->get();
+        return view('user.home', compact('featuredProducts'));
     }
 }

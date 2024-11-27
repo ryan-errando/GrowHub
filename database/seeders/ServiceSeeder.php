@@ -22,7 +22,8 @@ class ServiceSeeder extends Seeder
                 'price_per_hour' => 6500, // $65.00
                 'minimum_hours' => 1,
                 'maximum_hours' => 8,
-                'is_available' => true
+                'is_available' => true,
+                'image' => ''
             ],
             [
                 'shop_id' => 1,
@@ -31,7 +32,8 @@ class ServiceSeeder extends Seeder
                 'price_per_hour' => 4500, // $45.00
                 'minimum_hours' => 1,
                 'maximum_hours' => 4,
-                'is_available' => true
+                'is_available' => true,
+                'image' => ''
             ]
         ];
 
@@ -44,7 +46,8 @@ class ServiceSeeder extends Seeder
                 'price_per_hour' => 8000, // $80.00
                 'minimum_hours' => 2,
                 'maximum_hours' => 6,
-                'is_available' => true
+                'is_available' => true,
+                'image' => ''
             ],
             [
                 'shop_id' => 2,
@@ -53,7 +56,8 @@ class ServiceSeeder extends Seeder
                 'price_per_hour' => 4000, // $40.00
                 'minimum_hours' => 1,
                 'maximum_hours' => 3,
-                'is_available' => true
+                'is_available' => true,
+                'image' => ''
             ]
         ];
 
@@ -66,7 +70,8 @@ class ServiceSeeder extends Seeder
                 'price_per_hour' => 5500, // $55.00
                 'minimum_hours' => 3,
                 'maximum_hours' => 8,
-                'is_available' => true
+                'is_available' => true,
+                'image' => ''
             ],
             [
                 'shop_id' => 3,
@@ -75,7 +80,8 @@ class ServiceSeeder extends Seeder
                 'price_per_hour' => 7000, // $70.00
                 'minimum_hours' => 1,
                 'maximum_hours' => 4,
-                'is_available' => true
+                'is_available' => true,
+                'image' => ''
             ]
         ];
 

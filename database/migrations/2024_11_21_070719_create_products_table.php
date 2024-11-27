@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
             $table->integer('stock');
-            $table->json('images')->default('[]');
+            $table->string('image');
             $table->timestamps();
         });
     }
