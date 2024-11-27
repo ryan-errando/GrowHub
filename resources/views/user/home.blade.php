@@ -1,6 +1,6 @@
 @extends('layout.user')
 
-@section('title', '')
+@section('title', 'Home')
 
 @section('content')
 <div>
