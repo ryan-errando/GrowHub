@@ -27,32 +27,33 @@
             </div>
 
             <!-- Quantity and Add to Cart -->
-            <div class="d-flex align-items-center gap-4">
-                <div class="quantity-selector d-flex align-items-center"
-                    style="background-color: #214F3E; border-radius: 8px;">
-                    <button class="btn px-3 py-2"
-                        onclick="updateQuantity(-1)"
-                        style="color: white;">
-                        -
-                    </button>
-                    <input type="number"
-                        id="quantity"
-                        value="1"
-                        min="1"
-                        class="form-control text-center border-0"
-                        style="width: 60px; background: none; color: white;">
-                    <button class="btn px-3 py-2"
-                        onclick="updateQuantity(1)"
-                        style="color: white;">
-                        +
+            <form action="{{ route('user.cart.add') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="quantity-selector d-flex align-items-center"
+                        style="background-color: #214F3E; border-radius: 8px;">
+                        <button type="button" class="btn px-3 py-2"
+                            onclick="updateQuantity(-1)"
+                            style="color: white;">-</button>
+                        <input type="number"
+                            id="quantity"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            class="form-control text-center border-0"
+                            style="width: 60px; background: none; color: white;">
+                        <button type="button" class="btn px-3 py-2"
+                            onclick="updateQuantity(1)"
+                            style="color: white;">+</button>
+                    </div>
+
+                    <button type="submit" class="btn px-4 py-2 flex-grow-1"
+                        style="background-color: #214F3E; color: white; border-radius: 8px;">
+                        Add to cart
                     </button>
                 </div>
-
-                <button class="btn px-4 py-2 flex-grow-1"
-                    style="background-color: #214F3E; color: white; border-radius: 8px;">
-                    Add to cart
-                </button>
-            </div>
+            </form>
         </div>
 
         <!-- Product Image -->

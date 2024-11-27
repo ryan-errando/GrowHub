@@ -1,7 +1,6 @@
 <div class="col-md-4">
-    <a href="{{ route('user.service.detail', $service->id)}}" class="text-decoration-none">
-        <div class="card border-0 h-100"
-            style="border-radius: 15px; overflow: hidden; background-color: #D1F2D9;">
+    <div class="card border-0 h-100" style="border-radius: 15px; overflow: hidden; background-color: #D1F2D9; position: relative;">
+        <a href="{{ route('user.service.detail', $service->id)}}" class="text-decoration-none">
             <div style="background-color: #fce5cd; height: 250px;">
                 <img src="{{ asset('storage/' . $service->image) }}"
                     class="img-fluid"
@@ -19,6 +18,17 @@
                     Rp {{ number_format($service->price_per_hour, 0, ',', '.') }} / Hour
                 </p>
             </div>
-        </div>
-    </a>
+        </a>
+        <form action="{{ route('user.cart.add') }}" method="POST" 
+              style="position: absolute; bottom: 15px; right: 15px;">
+            @csrf
+            <input type="hidden" name="service_id" value="{{ $service->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" 
+                    class="btn btn-sm" 
+                    style="background-color: #214F3E; color: white; border-radius: 6px;">
+                <i class="bi bi-cart-plus"></i>
+            </button>
+        </form>
+    </div>
 </div>

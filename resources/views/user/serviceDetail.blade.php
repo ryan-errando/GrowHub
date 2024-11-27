@@ -1,6 +1,6 @@
 @extends('layout.user')
 
-@section('title', 'Services | ' . $service->name)
+@section('title', 'Service | ' . $service->name)
 
 @section('content')
 <div class="container py-5">
@@ -10,14 +10,14 @@
     </a>
 
     <div class="row mt-4">
-        <!-- service$service Info -->
+        <!-- service Info -->
         <div class="col-lg-6">
             <h1 class="display-4 mb-3" style="color: #214F3E; font-weight: bold;">
                 {{ $service->name }}
             </h1>
 
             <h2 class="mb-4" style="color: #214F3E; font-weight: bold;">
-                Rp {{ number_format($service->price, 0, ',', '.') }}
+                Rp {{ number_format($service->price_per_hour, 0, ',', '.') }} / Hour
             </h2>
 
             <div class="mb-5">
@@ -27,35 +27,36 @@
             </div>
 
             <!-- Quantity and Add to Cart -->
-            <div class="d-flex align-items-center gap-4">
-                <div class="quantity-selector d-flex align-items-center"
-                    style="background-color: #214F3E; border-radius: 8px;">
-                    <button class="btn px-3 py-2"
-                        onclick="updateQuantity(-1)"
-                        style="color: white;">
-                        -
-                    </button>
-                    <input type="number"
-                        id="quantity"
-                        value="1"
-                        min="1"
-                        class="form-control text-center border-0"
-                        style="width: 60px; background: none; color: white;">
-                    <button class="btn px-3 py-2"
-                        onclick="updateQuantity(1)"
-                        style="color: white;">
-                        +
+            <form action="{{ route('user.cart.add') }}" method="POST">
+                @csrf
+                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="quantity-selector d-flex align-items-center"
+                        style="background-color: #214F3E; border-radius: 8px;">
+                        <button type="button" class="btn px-3 py-2"
+                            onclick="updateQuantity(-1)"
+                            style="color: white;">-</button>
+                        <input type="number"
+                            id="quantity"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            class="form-control text-center border-0"
+                            style="width: 60px; background: none; color: white;">
+                        <button type="button" class="btn px-3 py-2"
+                            onclick="updateQuantity(1)"
+                            style="color: white;">+</button>
+                    </div>
+
+                    <button type="submit" class="btn px-4 py-2 flex-grow-1"
+                        style="background-color: #214F3E; color: white; border-radius: 8px;">
+                        Add to cart
                     </button>
                 </div>
-
-                <button class="btn px-4 py-2 flex-grow-1"
-                    style="background-color: #214F3E; color: white; border-radius: 8px;">
-                    Add to cart
-                </button>
-            </div>
+            </form>
         </div>
 
-        <!-- service$service Image -->
+        <!-- service Image -->
         <div class="col-lg-6">
             <div class="p-3" style="background-color: #fce5cd; border-radius: 20px;">
                 <img src="{{ asset('storage/' . $service->image) }}"
