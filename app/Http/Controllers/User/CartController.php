@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\serviceCartItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,61 +18,83 @@ class CartController
         ]);
 
         $cartItems = $cart->cartItems()->with('product')->get();
+        $serviceItems = $cart->serviceCartItems()->with('service')->get();
 
-        $subtotal = $cartItems->sum(function($item) {
+        $productSubtotal = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
 
-        return view('user.cart', compact('cartItems', 'subtotal'));
+        $serviceSubtotal = $cart->serviceCartItems->sum(function ($item) {
+            return $item->service->price_per_hour * $item->quantity;
+        });
+
+        $subtotal = $productSubtotal + $serviceSubtotal;
+
+        return view('user.cart', compact('cartItems', 'serviceItems', 'subtotal'));
     }
 
     public function addToCart(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:products,id',
+            'type' => 'required|in:product,service',
+            'id' => 'required',
             'quantity' => 'required|integer|min:1'
         ]);
 
-        // Get or create cart
         $cart = Cart::firstOrCreate([
             'user_id' => Auth::id()
         ]);
 
-        // Update or create cart item
-        $cartItem = CartItem::updateOrCreate(
-            [
-                'cart_id' => $cart->id,
-                'product_id' => $request->product_id
-            ],
-            [
-                'quantity' => $request->quantity
-            ]
-        );
+        if ($request->type === 'product') {
+            CartItem::updateOrCreate(
+                [
+                    'cart_id' => $cart->id,
+                    'product_id' => $request->id
+                ],
+                ['quantity' => $request->quantity]
+            );
+        } else {
+            serviceCartItem::updateOrCreate(
+                [
+                    'cart_id' => $cart->id,
+                    'service_id' => $request->id
+                ],
+                ['quantity' => $request->quantity]
+            );
+        }
         return redirect()->back()->with('success', 'Product added to cart');
     }
 
-    public function updateQuantity(Request $request, CartItem $cartItem)
+    public function updateQuantity(Request $request, $type, $id)
     {
         $request->validate([
             'quantity' => 'required|integer|min:1'
         ]);
-    
-        $cartItem->update([
-            'quantity' => $request->quantity
-        ]);
-    
-        // Get updated cart total
-        $cart = $cartItem->cart;
-        $subtotal = $cart->cartItems->sum(function($item) {
-            return $item->product->price * $item->quantity;
-        });
-    
+
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        if ($type === 'product') {
+            $cartItem = CartItem::where('cart_id', $cart->id)
+                ->where('id', $id)
+                ->firstOrFail();
+            $cartItem->update(['quantity' => $request->quantity]);
+        } else {
+            $serviceItem = ServiceCartItem::where('cart_id', $cart->id)
+                ->where('id', $id)
+                ->firstOrFail();
+            $serviceItem->update(['quantity' => $request->quantity]);
+        }
+
         return redirect()->back()->with('success', 'Cart updated successfully');
     }
 
-    public function removeItem(CartItem $cartItem)
+    public function removeItem(Request $request, $type, $id)
     {
-        $cartItem->delete();
+        if ($type === 'product') {
+            CartItem::findOrFail($id)->delete();
+        } else {
+            ServiceCartItem::findOrFail($id)->delete();
+        }
         return redirect()->route('user.cart')->with('success', 'Item removed from cart');
     }
 }

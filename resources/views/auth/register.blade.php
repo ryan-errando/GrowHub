@@ -43,14 +43,6 @@
                         <p class="text-danger mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="shop_description" class="form-label" style="font-weight: 600;">Shop Description</label>
-                        <textarea class="form-control" id="shop_description" name="shop_description"
-                                  style="background-color: #D3D3D3; border: none; border-radius: 10px; padding: 10px;">{{ old('shop_description') }}</textarea>
-                        @error('shop_description')
-                        <p class="text-danger mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="mb-3">

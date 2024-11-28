@@ -9,8 +9,7 @@ class Shop extends Model
     
     protected $fillable = [
         'seller_id',
-        'name',
-        'description',
+        'name'
     ];
 
     public function seller()

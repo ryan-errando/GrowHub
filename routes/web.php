@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Seller\DashboardController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ServiceController;
@@ -17,8 +18,7 @@ Route::get('register', [RegisterController::class, 'index'])->name('register')->
 Route::post('register', [RegisterController::class, 'store']);
 
 
-Route::middleware(['auth'])->group(function () {
-
+Route::middleware('auth:web')->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('user.home');
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
@@ -33,6 +33,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('cart', [CartController::class, 'index'])->name('user.cart');
     Route::post('cart/add', [CartController::class, 'addToCart'])->name('user.cart.add');
-    Route::patch('cart/item/{cartItem}', [CartController::class, 'updateQuantity'])->name('user.cart.update');
-    Route::delete('cart/item/{cartItem}', [CartController::class, 'removeItem'])->name('user.cart.remove');
+    Route::patch('cart/{type}/{id}', [CartController::class, 'updateQuantity'])->name('user.cart.update');
+    Route::delete('cart/{type}/{id}', [CartController::class, 'removeItem'])->name('user.cart.remove');
+});
+
+Route::middleware('auth:seller')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index']);
 });

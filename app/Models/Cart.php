@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    
+
     protected $fillable = [
         'user_id',
     ];
@@ -20,5 +20,9 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
-    
+
+    public function serviceCartItems()
+    {
+        return $this->hasMany(ServiceCartItem::class);
+    }
 }

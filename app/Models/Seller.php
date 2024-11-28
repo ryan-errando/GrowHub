@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Database\Eloquent\Model;
 
-class Seller extends Model
+class Seller extends Authenticable
 {
 
     protected $fillable = [

@@ -18,17 +18,14 @@ class ShopSeeder extends Seeder
             [
                 'seller_id' => 1,
                 'name' => 'Tech Haven Store',
-                'description' => 'Your one-stop shop for all things technology'
             ],
             [
                 'seller_id' => 2,
                 'name' => 'Fashion Studio Boutique',
-                'description' => 'Trendy and stylish fashion for everyone'
             ],
             [
                 'seller_id' => 3,
                 'name' => 'Home Essentials Shop',
-                'description' => 'Everything you need for your home'
             ]
         ];
 

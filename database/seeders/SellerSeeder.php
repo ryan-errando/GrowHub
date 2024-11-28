@@ -17,20 +17,20 @@ class SellerSeeder extends Seeder
         $sellers = [
             [
                 'name' => 'Tech Haven',
-                'email' => 'tech.haven@example.com',
-                'password' => Hash::make('password123'),
+                'email' => 'tech.haven@gmail.com',
+                'password' => Hash::make('password'),
                 'profile_picture' => 'sellers/tech-haven.jpg'
             ],
             [
                 'name' => 'Fashion Studio',
-                'email' => 'fashion.studio@example.com',
-                'password' => Hash::make('password123'),
+                'email' => 'fashion.studio@gmail.com',
+                'password' => Hash::make('password'),
                 'profile_picture' => 'sellers/fashion-studio.jpg'
             ],
             [
                 'name' => 'Home Essentials',
-                'email' => 'home.essentials@example.com',
-                'password' => Hash::make('password123'),
+                'email' => 'home.essentials@gmail.com',
+                'password' => Hash::make('password'),
                 'profile_picture' => 'sellers/home-essentials.jpg'
             ]
         ];
