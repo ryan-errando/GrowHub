@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Seller\DashboardController;
+use App\Http\Controllers\Seller\SellerProductController;
+use App\Http\Controllers\Seller\SellerServiceController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ServiceController;
@@ -42,5 +44,15 @@ Route::middleware('auth:web')->group(function () {
 });
 
 Route::middleware('auth:seller')->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
+    Route::get('/addProducts/create', [SellerProductController::class, 'create'])->name('sellerProducts.create');
+    Route::post('/addProducts', [SellerProductController::class, 'store'])->name('sellerProducts.store');
+    Route::get('products/{product}/edit', [SellerProductController::class, 'edit'])->name('sellerProducts.edit');
+    Route::put('products/{product}', [SellerProductController::class, 'update'])->name('sellerProducts.update');
+    Route::delete('products/{product}', [SellerProductController::class, 'destroy'])->name('sellerProducts.destroy');
+    Route::get('/addServices/create', [SellerServiceController::class, 'create'])->name('sellerServices.create');
+    Route::post('/addServices', [SellerServiceController::class, 'store'])->name('sellerServices.store');
+    Route::get('services/{service}/edit', [SellerServiceController::class, 'edit'])->name('sellerServices.edit');
+    Route::put('services/{service}', [SellerServiceController::class, 'update'])->name('sellerServices.update');
+    Route::delete('services/{service}', [SellerServiceController::class, 'destroy'])->name('sellerServices.destroy');
 });

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('minimum_hours')->default(1);
             $table->integer('maximum_hours')->nullable();
             $table->boolean('is_available')->default(true);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
