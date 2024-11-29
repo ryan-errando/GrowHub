@@ -8,6 +8,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\ProfileController;
 
 Route::get('/', function () {return redirect('/login');});
 
@@ -20,6 +21,9 @@ Route::post('register', [RegisterController::class, 'store']);
 
 Route::middleware('auth:web')->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('user.home');
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('user.profile');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('user.profile.update');
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
