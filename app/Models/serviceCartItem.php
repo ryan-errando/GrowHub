@@ -10,6 +10,11 @@ class serviceCartItem extends Model
         'cart_id',
         'service_id',
         'quantity',
+        'start_date'
+    ];
+
+    protected $casts = [
+        'start_date' => 'datetime'
     ];
 
     public function cart()

@@ -38,7 +38,8 @@ class CartController
         $request->validate([
             'type' => 'required|in:product,service',
             'id' => 'required',
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
+            'start_date' => $request->type === 'service' ? 'required|date' : 'nullable'
         ]);
 
         $cart = Cart::firstOrCreate([
@@ -59,7 +60,10 @@ class CartController
                     'cart_id' => $cart->id,
                     'service_id' => $request->id
                 ],
-                ['quantity' => $request->quantity]
+                [
+                    'quantity' => $request->quantity,
+                    'start_date' => $request->start_date
+                ]
             );
         }
         return redirect()->back()->with('success', 'Product added to cart');

@@ -71,9 +71,14 @@
             </div>
             <div class="col-6">
                 <div class="card-body">
-                    <h6 class="card-title" style="color: #214F3E; margin-bottom: 5px;">Name: {{ $item->service->name }}</h6>
+                    <h6 class="card-title" style="color: #214F3E; margin-bottom: 5px;">
+                        Name: {{ $item->service->name }}
+                    </h6>
+                    <p class="card-text" style="color: #214F3E; margin-bottom: 5px;">
+                        Price: Rp {{ number_format($item->service->price_per_hour, 0, ',', '.') }} / Hour
+                    </p>
                     <p class="card-text" style="color: #214F3E; margin-bottom: 0;">
-                        Price: Rp {{ number_format($item->service->price_per_hour, 0, ',', '.') }}
+                        Start Time: {{ \Carbon\Carbon::parse($item->start_date)->format('d M Y H:i') }}
                     </p>
                 </div>
             </div>

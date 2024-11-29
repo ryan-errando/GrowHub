@@ -46,6 +46,8 @@
                         <button type="button" class="btn px-3 py-2"
                             onclick="updateQuantity(1)"
                             style="color: white;">+</button>
+                        <input type="hidden" name="type" value="product">
+                        <input type="hidden" name="id" value="{{ $product->id }}">
                     </div>
 
                     <button type="submit" class="btn px-4 py-2 flex-grow-1"

@@ -29,7 +29,20 @@
             <!-- Quantity and Add to Cart -->
             <form action="{{ route('user.cart.add') }}" method="POST">
                 @csrf
-                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                <input type="hidden" name="type" value="service">
+                <input type="hidden" name="id" value="{{ $service->id }}">
+
+                <!-- Add DateTime Picker -->
+                <div class="mb-4">
+                    <label for="start_date" class="form-label" style="color: #214F3E; font-weight: 600;">Select Date and Time</label>
+                    <input type="datetime-local"
+                        class="form-control"
+                        id="start_date"
+                        name="start_date"
+                        required
+                        style="border-radius: 8px; border: 1px solid #214F3E;">
+                </div>
+
                 <div class="d-flex align-items-center gap-4">
                     <div class="quantity-selector d-flex align-items-center"
                         style="background-color: #214F3E; border-radius: 8px;">

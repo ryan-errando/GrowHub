@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('hours');
             $table->integer('price_per_hour');
             $table->dateTime('scheduled_start')->nullable();
-            $table->dateTime('scheduled_end')->nullable();
             $table->text('special_requests')->nullable();
             $table->timestamps();
         });

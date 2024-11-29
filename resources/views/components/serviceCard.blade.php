@@ -19,7 +19,7 @@
                 </p>
             </div>
         </a>
-        <form action="{{ route('user.cart.add') }}" method="POST"
+        <!-- <form action="{{ route('user.cart.add') }}" method="POST"
             style="position: absolute; bottom: 15px; right: 15px;">
             @csrf
             <input type="hidden" name="type" value="service">
@@ -30,6 +30,6 @@
                 style="background-color: #214F3E; color: white; border-radius: 6px;">
                 <i class="bi bi-cart-plus"></i>
             </button>
-        </form>
+        </form> -->
     </div>
 </div>

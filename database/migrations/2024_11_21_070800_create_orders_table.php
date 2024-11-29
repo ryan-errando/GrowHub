@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('shop_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['product', 'service']);
             $table->integer('total_amount');
-            $table->enum('status', ['pending', 'processing', 'completed', 'cancelled']);
+            $table->enum('status', ['processing', 'completed', 'cancelled']);
             $table->string('payment_status');
-            $table->timestamps();
+            $table->timestamps();       
         });
     }
 
