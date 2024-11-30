@@ -4,14 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderItem extends Model
+class ServiceOrderItem extends Model
 {
-    
     protected $fillable = [
         'order_id',
-        'product_id',
+        'service_id',
         'quantity',
-        'price'
+        'price',
+        'start_date'
+    ];
+
+    protected $casts = [
+        'start_date' => 'datetime'
     ];
 
     public function order()
@@ -19,9 +23,8 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function product()
+    public function service()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Service::class);
     }
-
 }

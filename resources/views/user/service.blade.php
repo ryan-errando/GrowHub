@@ -30,7 +30,9 @@
     <!-- Service Grid -->
     <div class="row g-4">
         @foreach($services as $service)
-            @include('components.serviceCard')
+            @if($service->is_available)
+                @include('components.serviceCard')
+            @endif
         @endforeach
     </div>
 

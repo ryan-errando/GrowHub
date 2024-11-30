@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Seller;
 use App\Models\Product;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SellerProductController 
 {
     public function create()
     {
-        $shop = Shop::where('seller_id', auth()->id())->firstOrFail();
+        $shop = Shop::where('seller_id', Auth::id())->firstOrFail();
         
         return view('seller.addProduct', compact('shop'));
     }

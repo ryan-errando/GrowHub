@@ -13,32 +13,16 @@ class Order extends Model
         'type',
         'total_amount',
         'status',
-        'payment_status',
+        'payment_status'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function shop()
-    {
-        return $this->belongsTo(Shop::class);
-    }
 
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function serviceOrder()
+    public function serviceOrderItems()
     {
-        return $this->hasOne(ServiceOrder::class);
+        return $this->hasMany(ServiceOrderItem::class);
     }
-
-    public function isServiceOrder()
-    {
-        return $this->type === 'service';
-    }
-    
 }
