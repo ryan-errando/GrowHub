@@ -117,7 +117,15 @@
 
     <div class="text-end mt-4">
         <h4 style="color: #214F3E;">Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}</h4>
+
+        <form action="{{ route('user.processOrder') }}" method="POST" class=" mt-4">
+        @csrf
+        <button type="submit" class="btn" style="background-color: #1b4332; color: white; border: none; padding: 0.75rem 2rem;">
+            Place Order
+        </button>
+    </form>
     </div>
+
     @else
     <div class="card border-0 p-5 text-center" style="background-color: #f5f5f5; border-radius: 20px;">
         <div class="mb-4">

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md" style="background-color: #214F3E;">
   <div class="container">
 
-    <a class="navbar-brand" href="/" style="color: #B8E2CA; font-size: 1.5rem; font-weight: 500;">GrowHub</a>
+    <a class="navbar-brand" href="/home" style="color: #B8E2CA; font-size: 1.5rem; font-weight: 500;">GrowHub</a>
 
     <!-- Navbar toggler for mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -21,7 +21,7 @@
           <a class="nav-link me-4" href="/services" style="color: #B8E2CA;">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-4" href="/orders" style="color: #B8E2CA;">Orders</a>
+          <a class="nav-link me-4" href="/orderProducts" style="color: #B8E2CA;">Orders</a>
         </li>
         <li class="nav-item me-3">
           <a class="nav-link" href="/cart" style="color: #B8E2CA;">

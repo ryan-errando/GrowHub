@@ -7,7 +7,7 @@
     <!-- Header -->
     <div class="row mb-5 align-items-center">
         <div class="col-md-6">
-            <h1 style="color: #214F3E; font-weight: bold;">Our<br>Collections</h1>
+            <h1 style="color: #214F3E; font-weight: bold;">Our<br>Services</h1>
         </div>
         <div class="col-md-6">
             <form action="{{ route('user.service.search') }}" method="GET">

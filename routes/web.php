@@ -6,11 +6,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Seller\DashboardController;
 use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\Seller\SellerServiceController;
+use App\Http\Controllers\Seller\SellerOrderController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\OrderController;
 
 Route::get('/', function () {return redirect('/login');});
 
@@ -41,6 +43,21 @@ Route::middleware('auth:web')->group(function () {
     Route::post('cart/add', [CartController::class, 'addToCart'])->name('user.cart.add');
     Route::patch('cart/{type}/{id}', [CartController::class, 'updateQuantity'])->name('user.cart.update');
     Route::delete('cart/{type}/{id}', [CartController::class, 'removeItem'])->name('user.cart.remove');
+
+
+    Route::post('/order/process', [OrderController::class, 'processOrder'])->name('user.processOrder');
+Route::get('/order/success', function () {
+    return view('user.orderSuccess');
+})->name('user.orderSuccess');
+
+Route::get('/orderProducts', [OrderController::class, 'productOrders'])
+->name('user.orderProducts');
+
+// Display service orders
+Route::get('/orderServices', [OrderController::class, 'serviceOrders'])
+->name('user.orderServices');
+
+    
 });
 
 Route::middleware('auth:seller')->group(function () {
@@ -55,4 +72,12 @@ Route::middleware('auth:seller')->group(function () {
     Route::get('services/{service}/edit', [SellerServiceController::class, 'edit'])->name('sellerServices.edit');
     Route::put('services/{service}', [SellerServiceController::class, 'update'])->name('sellerServices.update');
     Route::delete('services/{service}', [SellerServiceController::class, 'destroy'])->name('sellerServices.destroy');
+
+    Route::get('/sellerOrderProduct', [SellerOrderController::class, 'sellerProductOrders'])->name('seller.OrderProduct');
+    Route::get('/sellerOrderService', [SellerOrderController::class, 'sellerServiceOrders'])->name('seller.OrderService');
+    Route::put('/seller/orders/product/{order}/status', [SellerOrderController::class, 'updateProductOrderStatus'])
+    ->name('seller.updateProductOrderStatus');
+Route::put('/seller/orders/service/{order}/status', [SellerOrderController::class, 'updateServiceOrderStatus'])
+    ->name('seller.updateServiceOrderStatus');
+
 });

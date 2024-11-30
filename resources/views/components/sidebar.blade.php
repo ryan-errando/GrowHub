@@ -15,13 +15,13 @@
             Profile
         </a>
 
-        <a href="#" 
-           style="display: flex; align-items: center; padding: 0.75rem; color: #065f46; border-radius: 0.5rem; text-decoration: none; transition: background-color 0.2s; {{ Str::contains($activeMenu, 'orders') ? 'background-color: rgba(6, 95, 70, 0.1);' : '' }}">
-            <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.25rem; height: 1.25rem; margin-right: 0.75rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 17h6M9 13h6m2 8H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/>
-            </svg>
-            Orders
-        </a>
+        <a href="{{ route('seller.OrderProduct') }}" 
+   style="display: flex; align-items: center; padding: 0.75rem; color: #065f46; border-radius: 0.5rem; text-decoration: none; transition: background-color 0.2s; {{ Request::is('sellerOrderProduct*') || Request::is('sellerOrderService*') ? 'background-color: rgba(6, 95, 70, 0.1);' : '' }}">
+    <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.25rem; height: 1.25rem; margin-right: 0.75rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 17h6M9 13h6m2 8H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/>
+    </svg>
+    Orders
+</a>
 
         <a href="{{ route('sellerProducts.create') }}" 
            style="display: flex; align-items: center; padding: 0.75rem; color: #065f46; border-radius: 0.5rem; text-decoration: none; transition: background-color 0.2s; {{ Str::contains($activeMenu, 'sellerProducts') ? 'background-color: rgba(6, 95, 70, 0.1);' : '' }}">
