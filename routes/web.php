@@ -14,7 +14,9 @@ use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\OrderController;
 
-Route::get('/', function () {return redirect('/login');});
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::get('login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'authenticate']);
@@ -29,7 +31,7 @@ Route::middleware('auth:web')->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('user.profile');
     Route::patch('profile', [ProfileController::class, 'update'])->name('user.profile.update');
 
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('products', [ProductController::class, 'index'])->name('user.product');
     Route::get('products/search', [ProductController::class, 'search'])->name('user.product.search');
@@ -45,39 +47,43 @@ Route::middleware('auth:web')->group(function () {
     Route::delete('cart/{type}/{id}', [CartController::class, 'removeItem'])->name('user.cart.remove');
 
 
-    Route::post('/order/process', [OrderController::class, 'processOrder'])->name('user.processOrder');
-Route::get('/order/success', function () {
-    return view('user.orderSuccess');
-})->name('user.orderSuccess');
+    Route::post('order/process', [OrderController::class, 'processOrder'])->name('user.processOrder');
 
-Route::get('/orderProducts', [OrderController::class, 'productOrders'])
-->name('user.orderProducts');
+    Route::get('order/success', function () {
+        return view('user.orderSuccess');
+    })->name('user.orderSuccess');
 
-// Display service orders
-Route::get('/orderServices', [OrderController::class, 'serviceOrders'])
-->name('user.orderServices');
-
-    
+    Route::get('orderProducts', [OrderController::class, 'productOrders'])->name('user.orderProducts');
+    Route::get('orderServices', [OrderController::class, 'serviceOrders'])->name('user.orderServices');
+    Route::get('orderProducts/{order}', [OrderController::class, 'productOrderDetail'])->name('user.orderProductDetail');
+    Route::get('orderServices/{order}', [OrderController::class, 'serviceOrderDetail'])->name('user.orderServiceDetail');
 });
 
 Route::middleware('auth:seller')->group(function () {
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
-    Route::get('/addProducts/create', [SellerProductController::class, 'create'])->name('sellerProducts.create');
-    Route::post('/addProducts', [SellerProductController::class, 'store'])->name('sellerProducts.store');
+
+    Route::get('addProducts/create', [SellerProductController::class, 'create'])->name('sellerProducts.create');
+    Route::post('addProducts', [SellerProductController::class, 'store'])->name('sellerProducts.store');
+
     Route::get('products/{product}/edit', [SellerProductController::class, 'edit'])->name('sellerProducts.edit');
     Route::put('products/{product}', [SellerProductController::class, 'update'])->name('sellerProducts.update');
     Route::delete('products/{product}', [SellerProductController::class, 'destroy'])->name('sellerProducts.destroy');
-    Route::get('/addServices/create', [SellerServiceController::class, 'create'])->name('sellerServices.create');
-    Route::post('/addServices', [SellerServiceController::class, 'store'])->name('sellerServices.store');
+
+    Route::get('addServices/create', [SellerServiceController::class, 'create'])->name('sellerServices.create');
+    Route::post('addServices', [SellerServiceController::class, 'store'])->name('sellerServices.store');
+
     Route::get('services/{service}/edit', [SellerServiceController::class, 'edit'])->name('sellerServices.edit');
     Route::put('services/{service}', [SellerServiceController::class, 'update'])->name('sellerServices.update');
     Route::delete('services/{service}', [SellerServiceController::class, 'destroy'])->name('sellerServices.destroy');
 
-    Route::get('/sellerOrderProduct', [SellerOrderController::class, 'sellerProductOrders'])->name('seller.OrderProduct');
-    Route::get('/sellerOrderService', [SellerOrderController::class, 'sellerServiceOrders'])->name('seller.OrderService');
-    Route::put('/seller/orders/product/{order}/status', [SellerOrderController::class, 'updateProductOrderStatus'])
-    ->name('seller.updateProductOrderStatus');
-Route::put('/seller/orders/service/{order}/status', [SellerOrderController::class, 'updateServiceOrderStatus'])
-    ->name('seller.updateServiceOrderStatus');
+    Route::get('sellerOrderProduct', [SellerOrderController::class, 'sellerProductOrders'])->name('seller.OrderProduct');
+    Route::get('sellerOrderService', [SellerOrderController::class, 'sellerServiceOrders'])->name('seller.OrderService');
+    Route::put('seller/orders/product/{order}/status', [SellerOrderController::class, 'updateProductOrderStatus'])->name('seller.updateProductOrderStatus');
+    Route::put('seller/orders/service/{order}/status', [SellerOrderController::class, 'updateServiceOrderStatus'])->name('seller.updateServiceOrderStatus');
 
+    Route::get('sellerOrderProduct/{order}', [SellerOrderController::class, 'productOrderDetail'])->name('seller.orderProductDetail');
+    Route::get('sellerOrderService/{order}', [SellerOrderController::class, 'serviceOrderDetail'])->name('seller.orderServiceDetail');
 });

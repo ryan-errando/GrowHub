@@ -26,10 +26,5 @@ class Service extends Model
     {
         return $this->belongsTo(Shop::class);
     }
-
-    public function serviceOrders()
-    {
-        return $this->hasMany(ServiceOrder::class);
-    }
     
 }

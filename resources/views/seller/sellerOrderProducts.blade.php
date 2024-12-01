@@ -20,16 +20,12 @@ use Illuminate\Support\Facades\Request;
     </div>
 
     <div class="nav nav-tabs mb-4">
-        <a href="{{ route('seller.OrderProduct') }}" 
-           class="nav-link {{ Request::is('sellerOrderProduct*') ? 'active' : '' }}" 
-           style="color: {{ Request::is('sellerOrderProduct*') ? '#1b4332' : '#AAA' }}; 
-                  border-color: {{ Request::is('sellerOrderProduct*') ? '#1b4332' : 'transparent' }};">
+        <a href="{{ route('seller.OrderProduct') }}"
+            class="nav-link {{ Request::is('sellerOrderProduct*') ? 'text-success active border-success border-bottom-2' : 'text-muted' }}">
             Product
         </a>
-        <a href="{{ route('seller.OrderService') }}" 
-           class="nav-link {{ Request::is('sellerOrderService*') ? 'active' : '' }}" 
-           style="color: {{ Request::is('sellerOrderService*') ? '#1b4332' : '#AAA' }}; 
-                  border-color: {{ Request::is('sellerOrderService*') ? '#1b4332' : 'transparent' }};">
+        <a href="{{ route('seller.OrderService') }}"
+            class="nav-link {{ Request::is('sellerOrderService*') ? 'text-success active border-success border-bottom-2' : 'text-muted' }}">
             Service
         </a>
     </div>
@@ -45,37 +41,37 @@ use Illuminate\Support\Facades\Request;
                     <p>Order Status: {{ ucfirst($order->status) }}</p>
                 </div>
                 <div class="d-flex flex-column gap-2">
-                @if($order->status === 'processing')
+                    @if($order->status === 'processing')
                     <form action="{{ route('seller.updateProductOrderStatus', $order->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="status" value="completed">
-                        <button type="submit" 
-                                class="btn mb-2" 
-                                style="background-color: #198754; color: white;"
-                                onclick="return confirm('Are you sure you want to mark this order as completed?')">
+                        <button type="submit"
+                            class="btn mb-2"
+                            style="background-color: #198754; color: white;"
+                            onclick="return confirm('Are you sure you want to mark this order as completed?')">
                             Complete Order
                         </button>
                     </form>
-                    
+
                     <form action="{{ route('seller.updateProductOrderStatus', $order->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="status" value="cancelled">
-                        <button type="submit" 
-                                class="btn" 
-                                style="background-color: #dc3545; color: white;"
-                                onclick="return confirm('Are you sure you want to cancel this order?')">
+                        <button type="submit"
+                            class="btn"
+                            style="background-color: #dc3545; color: white;"
+                            onclick="return confirm('Are you sure you want to cancel this order?')">
                             Cancel Order
                         </button>
                     </form>
-                @endif
-                <a href="#" 
-                   class="btn" 
-                   style="background-color: #1b4332; color: white;">
-                    Order Detail
-                </a>
-</div>
+                    @endif
+                    <a href="{{ route('seller.orderProductDetail', $order)}}"
+                        class="btn"
+                        style="background-color: #1b4332; color: white;">
+                        Order Detail
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -84,42 +80,42 @@ use Illuminate\Support\Facades\Request;
     <div class="d-flex justify-content-center mt-4">
         <div class="pagination" style="display: flex; gap: 0.5rem; align-items: center;">
             @if ($orders->onFirstPage())
-                <span style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">
-                    «
-                </span>
+            <span style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">
+                «
+            </span>
             @else
-                <a href="{{ $orders->previousPageUrl() }}" style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer;">
-                    «
-                </a>
+            <a href="{{ $orders->previousPageUrl() }}" style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer;">
+                «
+            </a>
             @endif
 
             @for ($i = 1; $i <= min(3, $orders->lastPage()); $i++)
                 @if ($orders->currentPage() == $i)
-                    <span style="background-color: #1b4332; color: white; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">
-                        {{ $i }}
-                    </span>
+                <span style="background-color: #1b4332; color: white; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">
+                    {{ $i }}
+                </span>
                 @else
-                    <a href="{{ $orders->url($i) }}" style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer;">
-                        {{ $i }}
-                    </a>
+                <a href="{{ $orders->url($i) }}" style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer;">
+                    {{ $i }}
+                </a>
                 @endif
-            @endfor
+                @endfor
 
-            @if($orders->lastPage() > 3)
+                @if($orders->lastPage() > 3)
                 <span style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">
                     ...
                 </span>
-            @endif
+                @endif
 
-            @if ($orders->hasMorePages())
+                @if ($orders->hasMorePages())
                 <a href="{{ $orders->nextPageUrl() }}" style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer;">
                     »
                 </a>
-            @else
+                @else
                 <span style="background-color: #E6D5C3; color: black; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">
                     »
                 </span>
-            @endif
+                @endif
         </div>
     </div>
 </div>

@@ -16,6 +16,11 @@ class Order extends Model
         'payment_status'
     ];
 
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
