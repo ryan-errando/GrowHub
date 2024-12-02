@@ -14,7 +14,8 @@ class Service extends Model
         'price_per_hour',
         'minimum_hours',
         'maximum_hours',
-        'is_available'
+        'is_available',
+        'image'
     ];
 
     protected $casts = [

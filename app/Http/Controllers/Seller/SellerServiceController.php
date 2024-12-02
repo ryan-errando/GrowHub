@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Seller;
 use App\Models\Service;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SellerServiceController 
 {
     public function create()
     {
-        $shop = Shop::where('seller_id', auth()->id())->firstOrFail();
+        $shop = Shop::where('seller_id', Auth::id())->firstOrFail();
         
         return view('seller.addService', compact('shop'));
     }
@@ -24,10 +25,15 @@ class SellerServiceController
             'minimum_hour' => 'required|integer|min:1',
             'maximum_hour' => 'required|integer|min:1|gte:minimum_hour',
             'is_available' => 'sometimes|boolean',
-            'shop_id' => 'required|exists:shops,id'
+            'shop_id' => 'required|exists:shops,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Set is_available to 0 if not checked
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('services', 'public');
+            $validated['image'] = $imagePath;
+        }
+
         $validated['is_available'] = $request->has('is_available') ? 1 : 0;
 
         Service::create($validated);

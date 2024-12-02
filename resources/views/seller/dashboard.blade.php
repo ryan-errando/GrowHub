@@ -10,7 +10,7 @@
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-@endif
+    @endif
 
     <!-- Products Section -->
     <div class="card mb-4">
@@ -39,21 +39,21 @@
                             <td>Rp {{ number_format($product->price, 2) }}</td>
                             <td>
                                 @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="width: 4rem; height: 4rem; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="width: 4rem; height: 4rem; object-fit: cover;">
                                 @endif
                             </td>
                             <td>
                                 <div class="d-flex flex-column gap-2">
-                                <form action="{{ route('sellerProducts.edit', $product->id) }}" method="GET">
-    @csrf
-    <button type="submit" class="btn btn-sm btn-success">Update</button>
-</form>
+                                    <form action="{{ route('sellerProducts.edit', $product->id) }}" method="GET">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success">Update</button>
+                                    </form>
 
-<form action="{{ route('sellerProducts.destroy', $product->id) }}" method="POST" style="display: inline;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
-</form>
+                                    <form action="{{ route('sellerProducts.destroy', $product->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                                    </form>
 
                                 </div>
                             </td>
@@ -91,26 +91,26 @@
                             <td>{{ $service->name }}</td>
                             <td>{{ $service->description }}</td>
                             <td>Rp {{ number_format($service->price_per_hour, 2) }}</td>
-                            <td style="color: {{ $service->is_available ? '#198754' : '#dc3545' }}; font-weight: 500;">
-                             {{ $service->is_available ? 'Available' : 'Not Available' }}
+                            <td class="{{ $service->is_available ? 'text-success' : 'text-danger' }} fw-bold">
+                                {{ $service->is_available ? 'Available' : 'Not Available' }}
                             </td>
                             <td>
                                 @if($service->image)
-                                    <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" style="width: 4rem; height: 4rem; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" style="width: 4rem; height: 4rem; object-fit: cover;">
                                 @endif
                             </td>
                             <td>
                                 <div class="d-flex flex-column gap-2">
-                                <form action="{{ route('sellerServices.edit', $service->id) }}" method="GET">
-                                @csrf
-    <button type="submit" class="btn btn-sm btn-success">Update</button>
-</form>
+                                    <form action="{{ route('sellerServices.edit', $service->id) }}" method="GET">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success">Update</button>
+                                    </form>
 
-<form action="{{ route('sellerServices.destroy', $service->id) }}" method="POST" style="display: inline;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">Delete</button>
-</form>
+                                    <form action="{{ route('sellerServices.destroy', $service->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">Delete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

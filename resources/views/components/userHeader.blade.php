@@ -34,7 +34,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <form action="/logout" method="post" class="d-inline">
+          <form action="{{ route('user.logout') }}" method="post" class="d-inline">
             @csrf
             <button type="submit" class="nav-link" style="background: none; border: none; color: #B8E2CA;">
               <i class="bi bi-box-arrow-right fs-5"></i>

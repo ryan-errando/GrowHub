@@ -7,6 +7,7 @@ use App\Http\Controllers\Seller\DashboardController;
 use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\Seller\SellerServiceController;
 use App\Http\Controllers\Seller\SellerOrderController;
+use App\Http\Controllers\Seller\SellerProfileController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ServiceController;
@@ -30,8 +31,6 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('profile', [ProfileController::class, 'index'])->name('user.profile');
     Route::patch('profile', [ProfileController::class, 'update'])->name('user.profile.update');
-
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('products', [ProductController::class, 'index'])->name('user.product');
     Route::get('products/search', [ProductController::class, 'search'])->name('user.product.search');
@@ -57,11 +56,11 @@ Route::middleware('auth:web')->group(function () {
     Route::get('orderServices', [OrderController::class, 'serviceOrders'])->name('user.orderServices');
     Route::get('orderProducts/{order}', [OrderController::class, 'productOrderDetail'])->name('user.orderProductDetail');
     Route::get('orderServices/{order}', [OrderController::class, 'serviceOrderDetail'])->name('user.orderServiceDetail');
+
+    Route::post('user/logout', [AuthController::class, 'logout'])->name('user.logout');
 });
 
 Route::middleware('auth:seller')->group(function () {
-
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
 
@@ -86,4 +85,9 @@ Route::middleware('auth:seller')->group(function () {
 
     Route::get('sellerOrderProduct/{order}', [SellerOrderController::class, 'productOrderDetail'])->name('seller.orderProductDetail');
     Route::get('sellerOrderService/{order}', [SellerOrderController::class, 'serviceOrderDetail'])->name('seller.orderServiceDetail');
+
+    Route::get('/seller/profile', [SellerProfileController::class, 'index'])->name('seller.profile');
+    Route::put('/seller/profile/update', [SellerProfileController::class, 'update'])->name('seller.profile.update');
+
+    Route::post('seller/logout', [AuthController::class, 'logout'])->name('seller.logout');
 });

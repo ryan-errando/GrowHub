@@ -19,19 +19,25 @@ class SellerSeeder extends Seeder
                 'name' => 'Tech Haven',
                 'email' => 'tech.haven@gmail.com',
                 'password' => Hash::make('password'),
-                'profile_picture' => 'sellers/tech-haven.jpg'
+                'image' => '',
+                'phone' => '12345678',
+                'address' => 'jambi'
             ],
             [
                 'name' => 'Fashion Studio',
                 'email' => 'fashion.studio@gmail.com',
                 'password' => Hash::make('password'),
-                'profile_picture' => 'sellers/fashion-studio.jpg'
+                'image' => '',
+                'phone' => '12345678',
+                'address' => 'tangerang'
             ],
             [
                 'name' => 'Home Essentials',
                 'email' => 'home.essentials@gmail.com',
                 'password' => Hash::make('password'),
-                'profile_picture' => 'sellers/home-essentials.jpg'
+                'image' => '',
+                'phone' => '12345678',
+                'address' => 'jakarta'
             ]
         ];
 

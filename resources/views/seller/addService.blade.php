@@ -39,6 +39,11 @@
                 <input type="number" name="maximum_hour" class="form-control" style="background-color: #E6D5C3; border: none;" min="1" required>
             </div>
 
+            <div class="mb-4">
+                <label class="form-label" style="color: #1b4332;">Image:</label>
+                <input type="file" name="image" class="form-control" style="background-color: #E6D5C3; border: none;" accept="image/*">
+            </div>
+
             <div class="mb-3 form-check">
                 <input type="checkbox" name="is_available" class="form-check-input" id="availabilityCheck" value="1">
                 <label class="form-check-label" for="availabilityCheck" style="color: #1b4332;">
