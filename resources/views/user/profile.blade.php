@@ -70,6 +70,19 @@
                     @enderror
                 </div>
 
+                <!-- phone -->
+                <div class="mb-4">
+                    <label class="form-label" style="color: #214F3E;">Phone Number</label>
+                    <input type="tel"
+                        class="form-control @error('phone') is-invalid @enderror"
+                        name="phone"
+                        value="{{ old('phone', Auth::user()->phone) }}"
+                        style="border-radius: 8px; border: 1px solid #214F3E;">
+                    @error('phone')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <!-- Password -->
                 <div class="mb-3">
                     <label class="form-label" style="color: #214F3E;">New Password</label>

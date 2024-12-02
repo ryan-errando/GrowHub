@@ -38,7 +38,15 @@ use Illuminate\Support\Facades\Request;
                     <h5>OrderID: {{ $order->id }}</h5>
                     <p>Quantity: {{ $order->serviceOrderItems->sum('quantity') }} service(s)</p>
                     <p>Total: Rp{{ number_format($order->total_amount, 2) }}</p>
-                    <p>Order Status: {{ ucfirst($order->status) }}</p>
+                    <p>Order Status:
+                        <span class="fw-bold {{ 
+                            $order->status === 'processing' ? 'text-primary' : 
+                            ($order->status === 'completed' ? 'text-success' : 
+                            ($order->status === 'cancelled' ? 'text-danger' : '')) 
+                        }}">
+                            {{ ucfirst($order->status) }}
+                        </span>
+                    </p>
                 </div>
                 <a href="{{ route('user.orderServiceDetail', $order) }}"
                     class="btn"

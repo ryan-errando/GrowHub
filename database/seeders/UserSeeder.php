@@ -20,14 +20,16 @@ class UserSeeder extends Seeder
                 'email' => 'john@gmail.com',
                 'password' => Hash::make('password'),
                 'profile_picture' => '',
-                'address' => 'Jakarta'
+                'address' => 'Jakarta',
+                'phone' => '12345678'
             ],
             [
                 'name' => 'Jane Smith',
                 'email' => 'jane@gmail.com',
                 'password' => Hash::make('password'),
                 'profile_picture' => '',
-                'address' => 'Tangerang'
+                'address' => 'Tangerang',
+                'phone' => '12345678'
             ]
         ];
 

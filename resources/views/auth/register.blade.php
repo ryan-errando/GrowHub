@@ -55,10 +55,20 @@
                     @enderror
                 </div>
 
-                <div class="mb-3" id="address-field" style="display: none;">
+                <div class="mb-3">
+                    <label for="phone" class="form-label" style="font-weight: 600;">Phone Number</label>
+                    <input class="form-control" type="tel" id="phone" name="phone"
+                        value="{{ old('phone') }}" required
+                        style="background-color: #D3D3D3; border: none; border-radius: 10px; padding: 10px;">
+                    @error('phone')
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="address" class="form-label" style="font-weight: 600;">Address</label>
                     <input class="form-control" type="text" id="address" name="address"
-                        value="{{ old('address') }}"
+                        value="{{ old('address') }}" required
                         style="background-color: #D3D3D3; border: none; border-radius: 10px; padding: 10px;">
                     @error('address')
                     <p class="text-danger mt-1">{{ $message }}</p>
@@ -96,18 +106,13 @@
 <script>
     document.getElementById('role').addEventListener('change', function() {
         const shopDetails = document.getElementById('shop-details');
-        const addressField = document.getElementById('address-field');
         const shopInputs = shopDetails.querySelectorAll('input, textarea');
 
         if (this.value === 'seller') {
             shopDetails.style.display = 'block';
-            addressField.style.display = 'none';
-            addressField.querySelector('input').required = false;
             shopInputs.forEach(input => input.required = true);
         } else {
             shopDetails.style.display = 'none';
-            addressField.style.display = 'block';
-            addressField.querySelector('input').required = true;
             shopInputs.forEach(input => {
                 input.required = false;
                 input.value = '';
@@ -118,9 +123,6 @@
     // Initial state
     if (document.getElementById('role').value === 'seller') {
         document.getElementById('shop-details').style.display = 'block';
-        document.getElementById('address-field').style.display = 'none';
-    } else {
-        document.getElementById('address-field').style.display = 'block';
     }
 </script>
 

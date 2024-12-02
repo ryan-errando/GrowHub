@@ -22,7 +22,8 @@ class ProfileController
         $rules = [
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Profile picture validation
+            'phone' => 'required|string|max:15',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         if ($request->filled('password')) {
@@ -34,6 +35,7 @@ class ProfileController
         // Update basic info
         $user->name = $request->name;
         $user->address = $request->address;
+        $user->phone = $request->phone;
 
         // Update password if provided
         if ($request->filled('password')) {

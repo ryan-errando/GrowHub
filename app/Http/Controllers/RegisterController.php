@@ -21,9 +21,12 @@ class RegisterController
             'role' => 'required|in:user,seller',
             'name' => 'required|string',
             'email' => 'required|string|email:dns',
+            'phone' => 'required|string',
+            'address' => 'required|string',
             'password' => 'required|string|min:8|confirmed',
         ];
 
+        // Add role-specific validation rules
         if ($request->role === 'seller') {
             $rules['shop_name'] = 'required|string|max:255';
             $rules['shop_description'] = 'nullable|string';
@@ -35,22 +38,29 @@ class RegisterController
         $request->validate($rules);
 
         if ($request->role === 'seller') {
+            // Create seller with additional fields
             $seller = Seller::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
             ]);
+
+            // Create associated shop
             Shop::create([
                 'seller_id' => $seller->id,
                 'name' => $request->shop_name,
                 'description' => $request->shop_description ?? null
             ]);
         } else {
+            // Create user with additional fields
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'address' => $request->address
+                'phone' => $request->phone,
+                'address' => $request->address,
             ]);
         }
 

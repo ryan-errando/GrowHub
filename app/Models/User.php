@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Database\Eloquent\Model;
+
 class User extends Authenticable
 {
 
@@ -12,7 +13,8 @@ class User extends Authenticable
         'email',
         'password',
         'address',
-        'image'
+        'phone',
+        'profile_picture'
     ];
 
     protected $hidden = [

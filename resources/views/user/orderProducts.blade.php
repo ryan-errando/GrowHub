@@ -39,7 +39,15 @@ use Illuminate\Support\Facades\Request;
                     <h6>Shop: {{ $order->shop->name }}</h6>
                     <p>Quantity: {{ $order->orderItems->sum('quantity') }} item(s)</p>
                     <p>Total: Rp{{ number_format($order->total_amount, 2) }}</p>
-                    <p>Order Status: {{ ucfirst($order->status) }}</p>
+                    <p>Order Status:
+                        <span class="fw-bold {{ 
+                            $order->status === 'processing' ? 'text-primary' : 
+                            ($order->status === 'completed' ? 'text-success' : 
+                            ($order->status === 'cancelled' ? 'text-danger' : '')) 
+                        }}">
+                            {{ ucfirst($order->status) }}
+                        </span>
+                    </p>
                 </div>
                 <a href="{{ route('user.orderProductDetail', $order)}}"
                     class="btn"
