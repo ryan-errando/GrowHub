@@ -20,7 +20,7 @@ class RegisterController
         $rules = [
             'role' => 'required|in:user,seller',
             'name' => 'required|string',
-            'email' => 'required|string|email:dns',
+            'email' => 'required|string|email',
             'password' => 'required|string|min:8|confirmed',
         ];
 

@@ -3,9 +3,6 @@
 @section('title', 'Home')
 
 @section('content')
-<div>
-    <h1>Welcome, {{ Auth::user()->name }}</h1>
-</div>
 
 <!-- Hero Section -->
 <div class="container py-5"> 
