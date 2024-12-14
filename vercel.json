@@ -10,7 +10,7 @@
     }],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
         "APP_URL": "https://yourproductionurl.com",
         "APP_KEY": "base64:1yrm6itMtcCqZkSXNm4R9h6+ku/RQjtztdBgzrSAyHA=",
  
@@ -23,6 +23,13 @@
  
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie"
+        "SESSION_DRIVER": "cookie",
+
+        "DB_CONNECTION": "mysql",
+        "DB_HOST": "bygfs1vvfoaubihdk52x-mysql.services.clever-cloud.com",
+        "DB_PORT": "3306",
+        "DB_DATABASE": "bygfs1vvfoaubihdk52x",
+        "DB_USERNAME": "ujdimcencxeqfruz",
+        "DB_PASSWORD": "a5bNIshlFAzd1rJzx3L5"
     }
 }
