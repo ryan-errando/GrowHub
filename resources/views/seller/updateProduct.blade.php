@@ -51,10 +51,9 @@
                     required>
             </div>
 
-            <input type="hidden" name="image" value="{{ $product->image }}">
             
             <!-- Uncomment this section if you want to allow updating the image -->
-            <!-- <div class="mb-4">
+            <div class="mb-4">
                 <label class="form-label" style="color: #1b4332;">Image:</label>
                 <input 
                     type="file" 
@@ -62,7 +61,7 @@
                     class="form-control" 
                     style="background-color: #E6D5C3; border: none;" 
                     accept="image/*">
-            </div> -->
+            </div>
 
             <button type="submit" class="btn btn-success" style="background-color: #1b4332; border: none; padding: 0.5rem 2rem;">
                 Update Product

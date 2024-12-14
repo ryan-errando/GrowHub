@@ -51,7 +51,17 @@ class SellerProductController
             'description' => 'required',
             'price' => 'required|numeric|min:0',
             'shop_id' => 'required|exists:shops,id',
+             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480'
         ]);
+
+        if ($request->hasFile('image')) {
+            // Store new image
+            $imagePath = $request->file('image')->store('products', 'public');
+            $validated['image'] = $imagePath;
+        } else {
+            // Keep the existing image path
+            $validated['image'] = $product->image;
+        }
 
         $product->update($validated);
 

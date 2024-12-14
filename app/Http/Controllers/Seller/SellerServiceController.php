@@ -56,8 +56,18 @@ class SellerServiceController
             'minimum_hour' => 'required|integer|min:1',
             'maximum_hour' => 'required|integer|min:1|gte:minimum_hour',
             'is_available' => 'sometimes|boolean',
-            'shop_id' => 'required|exists:shops,id'
+            'shop_id' => 'required|exists:shops,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480'
         ]);
+
+        if ($request->hasFile('image')) {
+            // Store new image
+            $imagePath = $request->file('image')->store('services', 'public');
+            $validated['image'] = $imagePath;
+        } else {
+            // Keep the existing image path
+            $validated['image'] = $service->image;
+        }
 
         $validated['is_available'] = $request->has('is_available') ? 1 : 0;
 
